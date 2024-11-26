@@ -5,7 +5,6 @@
 #![no_main]
 #![no_std]
 
-use cortex_m::itm::write_str;
 use cortex_m_rt::entry;
 use rtt_target::{rtt_init_print, rprintln};
 use panic_rtt_target as _;
@@ -17,8 +16,7 @@ use microbit::{
     hal::Timer
 };
 
-use utils::Trait;
-
+use utils::ShowExtensions;
 
 // daily puzzle day: d00 (advent of code 2021 day 1 as template)
 #[entry]
@@ -30,7 +28,8 @@ fn main() -> ! {
     let mut display = Display::new(board.display_pins);
 
     rprintln!("########### d00 ###########");
-    // display.show_scroll(&mut timer, "abcdef");
+    // display.show_scroll(&mut timer, "0123456789:;<=>?@abcdefghijklmnopqrstuvwxyz");
+    display.show_scroll(&mut timer, "< AOC 2024: basti stinkt >");
 
     let data:[i32; 10] = [199, 200, 208 ,210 ,200, 207 ,240 ,269 ,260 ,263];
 
@@ -46,7 +45,7 @@ fn main() -> ! {
     display.show_scroll(&mut timer, "part 1:");
     display.show_number(&mut timer, sum1);
 
-    
+
     display.clear();
     timer.delay_ms(1_000_u16);
 
